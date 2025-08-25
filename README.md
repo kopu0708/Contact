@@ -30,7 +30,7 @@ child: 파라미터는 위젯안에 위젯을 넣을 수 있게 해주는 파라
 상단/중단/하단으로
 나누어 주는 위젯이다. appBar(),body,bottomNavigationBar 이렇게 3개의 파라미터를 넣으면 상 중 하 로 쪼개준다.
 body는 필수이다. 
-----
+
 #### AppBar()
 title: 제목
 leading: 제목왼쪽 아이콘 
