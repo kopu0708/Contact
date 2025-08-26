@@ -117,3 +117,31 @@ class 작명 extends StatelessWidget{
 -지나간 목록은 삭제해서 메모리 아낄 수 있음
 
 위와 같은 목록을 만들 때 항상 사용한다. ListView()는 Column() 이랑 유사하게 사용한다. children: [] 안에 목록으로 만들 위젯을 넣으면 된다. 
+#### ListTile() 위젯
+왼쪽에 그림있고 오른쪽에 글있는 레이아웃을 만들때 편리하다.
+~~~
+ListView(
+ children: [
+   ListTile(
+     leading: Icon(Icons.star),
+     title: Text('text'),
+      )
+   ]
+);
+~~~
+
+#### ListView.builder()
+목록을 동적으로 많이 만들 경우에 사용한다. 서버에서 정보를 가져와야하는 경우 리스트의 갯수를 모를 수 있다. 그럴 때에는 동적으로 리스트를 생성해야한다.
+~~~
+ListView.builder(
+ itemCount: 20,
+ itemBuilder: (context, i){
+   return Text('안녕');
+ }
+);
+~~~
+ListView.builder() 위젯을 넣고 파라미터를 2개 입력하면 된다.
+itemCount: 리스트 갯수
+itemBuilder: (){return 반복할 위젯}
+
+위의 코드는 Text('안녕') 을 ListView() 안에 20개 만들어준다. 일종의 반복문이다.
