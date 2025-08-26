@@ -141,7 +141,9 @@ ListView.builder(
 );
 ~~~
 ListView.builder() 위젯을 넣고 파라미터를 2개 입력하면 된다.
+
 itemCount: 리스트 갯수
+
 itemBuilder: (){return 반복할 위젯}
 
 위의 코드는 Text('안녕') 을 ListView() 안에 20개 만들어준다. 일종의 반복문이다.
