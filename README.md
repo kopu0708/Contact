@@ -146,3 +146,8 @@ itemCount: 리스트 갯수
 itemBuilder: (){return 반복할 위젯}
 
 위의 코드는 Text('안녕') 을 ListView() 안에 20개 만들어준다. 일종의 반복문이다.
+
+## 플러터 여러가지 기능 구현 
+
+### FloatingActionButton
+Scaffold에 floatingActionButtion: FloatingActionButton을 입력하고 그 안에 child 파라미터와 onPressed 파라미터를 입력하면 하단에 공중에 뜬 버튼을 만들 수 있다. FAB라고 줄여서 많이 부른다. 버튼을 눌렸을 때 코드를 실행하고 싶은 경우 onPressed(){이곳에 실행하고 싶은 코드를 여기다 쓴다.} 
