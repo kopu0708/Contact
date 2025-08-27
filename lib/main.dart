@@ -4,10 +4,17 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget{
+
+class MyApp extends StatefulWidget{
  MyApp({Key? key}) : super(key: key);
 
-   var a = 1;
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var a = 1;
+  var Users = <String>[];
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +23,12 @@ class MyApp extends StatelessWidget{
           floatingActionButton: FloatingActionButton(
               child: Text(a.toString()),
               onPressed: (){
-                print (a);
-                a++;
+                setState(() {
+                  Users.add('user');
+                });
               }
           ),
-          appBar: AppBar( title: Align(
-            alignment: Alignment. bottomRight,
-            child: Container(child:Text('dkdk'),width:50,height: 50,),
-          ),
+          appBar: AppBar( title: Text('연락처 앱'),
             backgroundColor: Color(0xFF4287F8),
           ),
           body:
@@ -35,7 +40,7 @@ class MyApp extends StatelessWidget{
                  print(i);
                  return ListTile(
                    leading: Icon(Icons.account_circle),
-                   title: Text('user'),
+                   title: Text(Users[i]),
                  );
                },
             ),
