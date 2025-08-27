@@ -151,3 +151,8 @@ itemBuilder: (){return 반복할 위젯}
 
 ### FloatingActionButton
 Scaffold에 floatingActionButtion: FloatingActionButton을 입력하고 그 안에 child 파라미터와 onPressed 파라미터를 입력하면 하단에 공중에 뜬 버튼을 만들 수 있다. FAB라고 줄여서 많이 부른다. 버튼을 눌렸을 때 코드를 실행하고 싶은 경우 onPressed(){이곳에 실행하고 싶은 코드를 여기다 쓴다.} 
+
+###  state
+변수랑 똑같지만 변경사항이 생기면 state를 쓰고 있는 위젯이 자동으로 재렌더링된다.
+
+그래서 좋아요 숫자를 일반 변수가 아니라 state로 만들어서 저장하면 변수에 변경사항이 생길 때 마다 재렌더링 된다. 
