@@ -151,3 +151,44 @@ itemBuilder: (){return 반복할 위젯}
 
 ### FloatingActionButton
 Scaffold에 floatingActionButtion: FloatingActionButton을 입력하고 그 안에 child 파라미터와 onPressed 파라미터를 입력하면 하단에 공중에 뜬 버튼을 만들 수 있다. FAB라고 줄여서 많이 부른다. 버튼을 눌렸을 때 코드를 실행하고 싶은 경우 onPressed(){이곳에 실행하고 싶은 코드를 여기다 쓴다.} 
+
+###  state
+변수랑 똑같지만 변경사항이 생기면 state를 쓰고 있는 위젯이 자동으로 재렌더링된다.
+
+그래서 좋아요 숫자를 일반 변수가 아니라 state로 만들어서 저장하면 변수에 변경사항이 생길 때 마다 재렌더링 된다. 
+#### statefullWidget 
+state 만들어 쓸려면 state 보관함 + 커스텀 widget 을 한 세트로 만들어야 한다. stful이라고 아무데나 쓰고 탭하면 자동완성된다.
+~~~
+class 테스트 extends StatefulWidget{
+ const 테스트 ({Key? key}) : super(key: key);
+ @override
+_테스트state createState() => _테스트state();
+}
+class _테스트State extends State {
+var a = 1; //이 변수는 state가 된다.
+@override
+ Widget build(BuildContext context) {
+ return Container();
+ }
+}
+~~~
+커스텀 위젯을 만드는 문법과 비슷하다.
+
+1.위에 있는 class는 건드릴 필요 없다.
+
+2.둘째 class 안에 변수를 만들면 자동으로 state가 된다. a라는 state가 변경되면 자동으로 재렌더링된다.
+
+#### 기존 위젯을 StatefulWidget으로 바꾸는 방법
+사용중인 위젯의 StatelessWidget이라는 부분에 커서를 올리고 왼쪽에 전구버튼을 누르면 StatefulWidget으로 바꿀수 있다.
+이렇게 StatefulWidget으로 바꾼다고 해서 재렌더링이 되는 것이 아니다. setState((){변경할 내용}) 안에 써야한다. 
+
+데이터 변동사항이 잦을 것 같은 위젯은 전분 StatefulWidget으로 만들고 이 안에서 만든 변수는 모두 state 이다. 
+
+참고: class 대신 변수 함수 써도 된다.
+변수와 함수 문법은 긴 코드 짧은 단어로 바꿔주는 문법일 뿐이라.  긴 위젯들은 변수 함수에 담아써도 문제는 없지만 재렌더링이 거의
+필요없는 위젯들이다. ex)앱바, 하단바, 다이얼로그 안내문 등등... 재렌더링이 자주 되는 것들은  stateful 아니면 stateless 클래스로 
+만들어야 성능저하가 거의 없다.
+
+### context 개념
+부모 위젯이 누구인가 정보를 가지고 있는 변수이다. 
+
