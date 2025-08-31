@@ -189,6 +189,31 @@ var a = 1; //이 변수는 state가 된다.
 필요없는 위젯들이다. ex)앱바, 하단바, 다이얼로그 안내문 등등... 재렌더링이 자주 되는 것들은  stateful 아니면 stateless 클래스로 
 만들어야 성능저하가 거의 없다.
 
-### context 개념
-부모 위젯이 누구인가 정보를 가지고 있는 변수이다. 
+### Dialog
+앱쓸 때 뜨는 팝업/모달창 같은 거다. showDialog()라는 기본 함수가 있다. 이곳에 파라미터를 넣어주면 쉽게 다이얼로그가 생성된다.
+showDialog()는 쓰는 순간 Dialog가 하나 생긴다 버튼의 onPressed: 안에 넣어보면
+~~~
+FloatingActionButton(
+  child: Text('버튼'),
+  onPressed: () {
 
+showDialog(
+  context: context,
+  builder: (context){
+    return Dialog(
+      child: Text('AlertDialog Title'),
+      );
+     },
+     );
+    },
+),
+~~~
+showDialog()에 들어갈 첫 파라미터는 context이다. 둘째 파라미터는 builder: 인제 여기에는 위젯을 return으로 반환하는 함수를 넣으면 된다. Dialog() 위젯은 모달창같은 배경이 까만 하얀박스를 만들어주는 기본 위젯이다. 
+
+하지만 Dialog가 나타나지 않는 경우도 있다. 이 문제를 해결하기 전에 context부터 짚고 넘어가겠다.
+
+### context 개념
+부모 위젯이 누구인가 정보를 가지고 있는 변수이다. 커스텀 위젯을 만들 때 보면 build() 함수를 쓰도록 되어있다. 근데 build()함수안에 첫 파라미터를 넣으면 그건 무조건 현재 위젯의 부모들이 누군지 담고있다. 참고로 이름은 마음대로 지어도 괜찮다.
+이것이 어디에 쓰이나면 showDialog(), Navigator(), Theme.of(), Scaffold.of() 이런 함수들은 context를 소괄호 안에 집어넣어야 작동을 하는 함수이기 때문에 이곳에 쓰인다.  
+
+이 중에 showDialog() 함수는 MaterialApp이 들어가 있어야 제대로 작동하기 때문에 context가 부모로 MaterialApp()을 가지도록 코드를 작성해야한다. 
