@@ -217,3 +217,39 @@ showDialog()에 들어갈 첫 파라미터는 context이다. 둘째 파라미터
 이것이 어디에 쓰이나면 showDialog(), Navigator(), Theme.of(), Scaffold.of() 이런 함수들은 context를 소괄호 안에 집어넣어야 작동을 하는 함수이기 때문에 이곳에 쓰인다.  
 
 이 중에 showDialog() 함수는 MaterialApp이 들어가 있어야 제대로 작동하기 때문에 context가 부모로 MaterialApp()을 가지도록 코드를 작성해야한다. 
+
+### Dialog를 띄웠을 떄 입력창 하나와 버튼 두개를 만드는 숙제 
+ 위 숙제를 해결하기 위해 인터넷 검색을 통해 TextField() 위젯에 대해 알았다. 사용자의 입력을 실시간으로 관리하기 위한 위젯으로 StatefulWidget으로 이루어져 있다.
+ 사용하기 위해서는 TextEditingController라는 객체를 생성해야한다. 
+ ~~~
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
+  @Override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  // 1. TextField를 제어할 비공개 컨트롤러 변수 선언
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextField(
+          controller: _controller, // 2. TextField에 컨트롤러 연결
+        ),
+        ElevatedButton(
+          onPressed: () {
+            // 3. 버튼을 누르면 컨트롤러를 통해 TextField의 값을 가져옴
+            print('입력된 텍스트: ${_controller.text}');
+          },
+          child: const Text('값 확인'),
+        ),
+      ],
+    );
+  }
+}
+~~~
+이런 식으로 사용된다. 참고로 _는 Dart언어의 private 변수임을 선언하는 기호라고 한다. 즉 해당 변수가 해당 클래스에서만 사용된다는 뜻이다. 
