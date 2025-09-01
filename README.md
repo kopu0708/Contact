@@ -238,8 +238,6 @@ class DialogUI extends StatelessWidget{
   final 작명;
 ~~~
 final은 런타임 프로그램 실행 중 값이 처음 한번 정해지면 변경할 수 없는 변수를 선언할때 쓰인다.
-
-
 3.이제 DialogUI() 안에서 자유롭게 사용할 수 있다.
 하지만 자식 위젯의 state를 부모 위젯으로 전송하지 못한다. 
 
