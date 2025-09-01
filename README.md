@@ -232,8 +232,8 @@ showDialog()에 들어갈 첫 파라미터는 context이다. 둘째 파라미터
 보내는 것은 자식쓰는 곳에 파라미터로 넣으면 된다. 
 ex) (MyApp 내부의 Dialog 커스텀 위젯)
 DialogUI(state : a) 
-
 **작명 : 변수명**  파라미터를 넣을 때에는 이렇게한다.
+
 자식 위젯 정의 부분에는 어떤 파라미터가 들어올 수 있다고 등록한다. final은 런타임 프로그램 실행 중 값이 처음 한번 정해지면 변경할 수 없는 변수를 선언할때 쓰인다.
 ~~~
 class DialogUI extends StatelessWidget{
