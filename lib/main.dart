@@ -18,13 +18,15 @@ class MyApp extends StatefulWidget{
 }
 
 class _MyAppState extends State<MyApp> {
-  int a = 0;
-  var friends = ['이정철','홍길동','아무개'];
+  var total = 3;
+  var friends = ['아', '홍길동','이정철'];
   var like = [0,0,0];
+  var inputData = TextEditingController();//입력값 저장
 
-  void increaseA(){
+  void increaseA(){//친구추가 함수
     setState(() {
-      a++;
+      friends.add(inputData.text);//toString()으로 하니깐 이상한 글자로 뜨고 text로 하니깐 입력값 그대로 나옴
+      total++;
     });
   }
   @override
@@ -34,10 +36,10 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(),
         body: Column(
           children: [
-            SizedBox(child: Text(a.toString()),),
+            SizedBox(child: Text(total.toString()),),
             Expanded(
               child: ListView.builder(
-                itemCount: 3,
+                itemCount: friends.length,
                 itemBuilder: (c,i){
                   return
                     ListTile(
@@ -51,8 +53,8 @@ class _MyAppState extends State<MyApp> {
       floatingActionButton: FloatingActionButton(
         onPressed: (){
            showDialog(context: context, builder: (context){
-        return DialogUI(state : a, increaseA: increaseA);
-      });
+        return DialogUI(state : total, increaseA: increaseA, inputData:inputData);
+      });//자식 위젯에 전송하고
     }
     ),
     );
@@ -60,9 +62,11 @@ class _MyAppState extends State<MyApp> {
 }
 
 class DialogUI extends StatelessWidget {
-  const DialogUI({super.key,this.state, required this.increaseA});
+   DialogUI({super.key,this.state, required this.increaseA, this.inputData});
     final state;
     final Function() increaseA;
+    var inputData;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -71,11 +75,10 @@ class DialogUI extends StatelessWidget {
         height: 300,
         child: Column(
           children: [
-            TextField(),
-            TextButton(onPressed: (){increaseA();}, child: Text('a를 늘려주기')),
+            TextField(controller: inputData),
+            TextButton(onPressed: (){increaseA();}, child: Text('친구추가')),
             TextButton(onPressed: (){Navigator.pop(context);},
                        child: Text('취소')),
-            Text(state.toString())
           ],
         ),
       ),
