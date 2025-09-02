@@ -18,15 +18,30 @@ class MyApp extends StatefulWidget{
 }
 
 class _MyAppState extends State<MyApp> {
-  var total = 3;
-  var friends = ['아', '홍길동','이정철'];
-  var like = [0,0,0];
+  var total = 0;
+  var friends = [];
   var inputData = TextEditingController();//입력값 저장
 
-  void increaseA(){//친구추가 함수
+
+  void increaseA() { // 친구추가 함수
+    if (inputData.text.isEmpty) {
+      print('입력된 내용이 없습니다.'); // 사용자에게 알려주거나 로그 출력
+      return; // 여기서 함수를 조기 종료
+    }
     setState(() {
-      friends.add(inputData.text);//toString()으로 하니깐 이상한 글자로 뜨고 text로 하니깐 입력값 그대로 나옴
+      friends.add(inputData.text);
       total++;
+      Navigator.pop(context); // Dialog를 닫는 코드
+    });
+
+    // Dialog에서 추가 버튼을 누른 후 입력창을 비워준다.
+    inputData.clear();
+  }
+
+  void DelectFriends(int index){//친구삭제 함수
+    setState(() {
+      friends.removeAt(index);
+      total--;
     });
   }
   @override
@@ -45,11 +60,18 @@ class _MyAppState extends State<MyApp> {
                     ListTile(
                     leading: Icon(Icons.account_circle),
                     title: Text(friends[i].toString()),
+                      trailing: IconButton(onPressed: (){DelectFriends(i);},
+                          icon: Icon(Icons.cancel))
                   );
                 }),
             ),
           ],
         ),
+      bottomNavigationBar: Container(width: 300, height: 100,color: Colors.blue,
+                           child: ElevatedButton(onPressed: (){setState(() {
+                             friends.sort();
+                           });}, child: Text('정렬'),),
+                           ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
            showDialog(context: context, builder: (context){
@@ -76,8 +98,8 @@ class DialogUI extends StatelessWidget {
         child: Column(
           children: [
             TextField(controller: inputData),
-            TextButton(onPressed: (){increaseA();}, child: Text('친구추가')),
-            TextButton(onPressed: (){Navigator.pop(context);},
+            TextButton(onPressed: (){increaseA();}, child: Text('친구추가')),//버튼을 누르면 함수호출
+            TextButton(onPressed: (){Navigator.pop(context);},//Dialog창 닫기 버튼
                        child: Text('취소')),
           ],
         ),
