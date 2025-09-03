@@ -1,255 +1,393 @@
-# contact
 
-A new Flutter project.
+-----
 
-## Getting Started
---------------------
-## 플러터 레이아웃 만드는 법 
+# Flutter 노트
 
-### 글자넣고 싶으면 Text()
- 위젯 안에 파라미터로 적고싶은 글을 넣으면 된다. 둘째 파라미터부터는 텍스트의 크기, 색, 폰트 등을 넣을 수 있다.
- #### style: TextStyle()
- 이 파라미터는 Text()위젯 안에 들어간다. TextStyle() 안에 스타일 다 넣으면 된다.  
- #### color 파라미터
- 색을 넣고 싶으면 color: 파라미터 쓰면 된다. 박스에 넣으면 박스배경색, 아이콘에 넣으면 아이콘 색이 입혀진다. 근데 색상넣는 방법은 3개  중 하나 선택하면 된다. 1번은 미리 정해진 색상표에서 고르는 방법, 2번은 RGBO로 고르는 방법, 3번은 hex 칼라로 고르는 방법 (앞에 0xff   붙이면 된다)
+## I. 플러터 레이아웃 만들기
 
-### Icon() 
-아이콘 위젯은 내부에 아이콘 이름을 적어 아이콘을 넣읗 수 있다. 아이콘 이름은 https://api.flutter.dev/flutter/material/Icons-class.html
+### \#\#\# 텍스트: `Text()`
 
-### 이미지 넣기
-프로젝트 내에 assets폴더를 만들고 이미지 파일을 넣어둔다. pubspec.yaml 파일을 찾아 flutter: 하위항목에 assets 폴더를 등록한다.
+글자를 화면에 표시할 때 사용합니다. 첫 번째 파라미터에 원하는 텍스트를 넣고, `style` 파라미터를 통해 디자인을 변경할 수 있습니다.
 
-### Container() 네모  박스 넣기
-Container() 또는 SizeBox()  둘 중 하나를 쓰면 네모 박스가 생성된다. width. height 이런 파라미터를 통해 사이즈 조절이 가능하다. 정수와 실수를 적고 단위는 적지 않는다.  (여기서 사용되는 수들의 단위는 LP(Logical Pixel)이다. px을 쓰지 않는 이유는 기기마다 픽셀의 절대적인 크기가 다르기 때문이다. 픽셀의 밀도에 관계없는 절대적인 수치를 LP라고 한다. 1cm는 38LP라고 한다.)
-
-### child:
-child: 파라미터는 위젯안에 위젯을 넣을 수 있게 해주는 파라미터이다.  
-
-### Scaffold() 위젯
-상단/중단/하단으로
-나누어 주는 위젯이다. appBar(),body,bottomNavigationBar 이렇게 3개의 파라미터를 넣으면 상 중 하 로 쪼개준다.
-body는 필수이다. 
-
-#### AppBar()
-title: 제목
-leading: 제목왼쪽 아이콘 
-actions: 제목오른쪽 아이콘들
-
-### 가로/세로로 균일하게 위젯 배치하는 법
-Row() 위젯과 Column위젯을 사용하면 된다. 가로로 균일하게 배치하고 싶으면 
-~~~
-MaterialApp(
-  home:Scaffold(
-    body: Row(
-          children: [--넣고 싶은 위젯들--]
-    ),
-  )
-);
-~~~
-이렇게 쓰면 []리스트 자료형 안에 넣은 위젯들이 가로로 배치된다. Column() 도 위와 같은 방식이다.
-위의 두 위젯은 mainAxisAlignment: 파라미터를 입력가능하다. 이 파라미터로 위젯들의 배치 간격을 조정할 수 있다.
-자동완성기능을 활용하여 사용하면 된다.
-Row() 말고 Column() 위젯에서도 마찬가지로 정렬이 가능하다. 다만 Column()은 mainAxisAlignment: 사용시 세로로 정렬해준다.
-왜냐하면 Row() 쓰면 mainAxis가 가로가 되고 Column()을 쓰면 mainAxis가 세로가 된다.
-
-### Container() 대신 SizedBox()
-width,height 이런 파라미터만 필요하면 SizeBox()를 쓰면 된다. 똑같은 박스 위젯이지만 Container()보다 훨씬 가볍기 때문이다. 
-
-### Container()에 여백주기
-margin: 바깥여백양, padding: 안쪽여백양 이런 파라미터를 쓰면 된다. 
-~~~
-margin : EdgeInsets.all(30), //상하좌우 여백을 30씩  준다.
-padding: EdgeInsets.fromLTRB(10,20,30,40),//왼쪽 10, 위 20, 오른쪽 30, 밑 40 만큼 여백을 줄 수 있다. 자동완성을 통해 좀 더 다양한 방식을 알아보면 된다.
-~~~
-
-###Container()에 나머지 스타일 주는 법
-decoration: BoxDecoration() 안에 다른 다양한 박스 스타일을 넣을 수 있게 되어있다. color, shape, boxShadow, gradient, image, borderRadius 등등...
-
-### 박스 정렬
-Center() 안에 자식으로 담으면 중앙정렬이 된다. 좌상단, 우하단 이런 정렬은 Align() 안에 담으면 된다.
-~~~
-Align(
-  alignment : Alignment.bottomLeft,
-  child : Container( width : 50, height : 50, color : Colors.blue)
+```dart
+Text(
+  '안녕하세요!',
+  style: TextStyle(
+    color: Colors.blue, // 글자 색상
+    fontSize: 24.0,     // 글자 크기
+    fontWeight: FontWeight.bold, // 굵기
+  ),
 )
-~~~
-이렇게 하면 하단왼쪽 정렬이다. bottomLeft 부분을 바꾸면 상하좌우정렬을 바꿀수 있다.
+```
 
-### 버튼 넣기
-TextButton(), ElevateButton(), IconButton() 외모만 다르고 같은 기능이다. opPressed 파라미터는 버튼 눌렀을 때 실행해줄 코드(함수) 를 넣을 수 있다. 
+> **🎨 색상 지정 방법 3가지**
+>
+> 1.  **미리 정의된 색상**: `Colors.blue`, `Colors.red` 등
+> 2.  **RGBO**: `Color.fromRGBO(255, 0, 0, 1)` (Red, Green, Blue, Opacity)
+> 3.  **HEX 코드**: `Color(0xFFE91E63)` (앞에 `0xFF`를 붙여서 사용)
 
-### Flexible 위젯 
-Row() 안에 박스를 여러개 배치할 때 박스의 폭을 고정된 숫자가 아니라 비율로 정하고 싶을 때가 있다. 그리고 싶으면 Flexible() 안에 박스들을 담으면 된다. 
-~~~
+-----
+
+### \#\#\# 아이콘: `Icon()`
+
+미리 정의된 아이콘을 보여주는 위젯입니다. `Icons` 클래스에서 원하는 아이콘을 선택하여 사용합니다.
+
+```dart
+Icon(
+  Icons.star,
+  color: Colors.yellow,
+  size: 50.0,
+)
+```
+
+> **Tip**: 아이콘의 종류는 [Flutter 공식 문서](https://api.flutter.dev/flutter/material/Icons-class.html)에서 찾아볼 수 있습니다.
+
+-----
+
+### \#\#\# 이미지: `Image.asset()`
+
+프로젝트 내부에 저장된 이미지를 불러올 때 사용합니다.
+
+1.  프로젝트 최상단에 `assets` 폴더를 만들고 이미지를 넣습니다.
+2.  `pubspec.yaml` 파일에 `assets` 폴더 경로를 등록합니다.
+
+<!-- end list -->
+
+```yaml
+# pubspec.yaml
+flutter:
+  assets:
+    - assets/
+```
+
+3.  `Image.asset('경로')` 코드를 사용해 이미지를 표시합니다.
+
+<!-- end list -->
+
+```dart
+Image.asset('assets/my_image.png')
+```
+
+-----
+
+### \#\#\# 박스: `Container()` 와 `SizedBox()`
+
+사각형 영역을 만드는 위젯입니다.
+
+  - **`Container()`**: 여백(`margin`, `padding`), 테두리, 배경색 등 다양한 꾸미기가 가능한 만능 박스입니다.
+  - **`SizedBox()`**: 단순히 **공간을 차지하거나 크기를 지정**하는 용도의 가벼운 박스입니다. `Container()`보다 가벼워 성능에 유리합니다.
+
+<!-- end list -->
+
+```dart
+Container(
+  width: 150,
+  height: 150,
+  color: Colors.blue,
+  padding: EdgeInsets.all(20), // 안쪽 여백
+  margin: EdgeInsets.all(10), // 바깥 여백
+  child: Text('Box'),
+  decoration: BoxDecoration( // color는 decoration과 동시 사용 불가
+    border: Border.all(color: Colors.black),
+    borderRadius: BorderRadius.circular(10),
+  ),
+)
+```
+
+> **단위 LP (Logical Pixel)**
+> Flutter에서 사용하는 `width`, `height` 등의 단위는 LP입니다. 다양한 기기의 화면 밀도(PPI)에 관계없이 일관된 크기를 보여주기 위한 논리적 단위입니다. (참고: 1cm ≈ 38LP)
+
+-----
+
+### \#\#\# 위젯 배치 및 정렬
+
+#### **`Row()`와 `Column()`: 가로/세로 배치**
+
+여러 위젯을 가로나 세로로 나란히 배치할 때 사용합니다. `children` 파라미터에 위젯 리스트(`[]`)를 전달합니다.
+
+  - `Row()`: 위젯을 **가로**로 배치합니다. (mainAxis: 가로)
+  - `Column()`: 위젯을 **세로**로 배치합니다. (mainAxis: 세로)
+
+<!-- end list -->
+
+```dart
 Row(
-  children : [
-    Flexible( child: Container(color : Colors.blue), flex : 1 ),
-    Flexible( child: Container(Color : Colors.green), flex : 1 )
-  ]
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 자식 위젯들의 간격 조절
+  children: [
+    Icon(Icons.star),
+    Icon(Icons.star),
+    Icon(Icons.star),
+  ],
 )
-~~~
-Row() 안에 있는 것들을 Flexible()로 각각 감싼 뒤에 flex를 주면 된다. flex는 이 박스가 얼마나 가로폭을 차지할지 결정하는 "배수"입니다. 1과 2를 써놓으면 1대 2만큼 차지 한다. 
-Column() 안에서도 사용가능하다.
-하나의 박스만 가로폭을 꽉 채우고 싶으면 이 위젯으로 감싸면 된다. 감싼 박스는 남은 폭을 꽉채우고 싶어한다.
+```
 
-### 커스텀 위젯 
-레이아웃이 너무 길고 복잡해져서 한 단어로 축약하고 싶을 때 사용한다. stless 라고 작성하고 탭키나 엔터키를 누르면 다음과 같은 코드가 자동완성 된다. 
-~~~
-class 작명 extends StatelessWidget{
-  const 작명({Key? key}) : super(key: key);
+#### **`Center()`와 `Align()`: 특정 위치 정렬**
+
+  - `Center()`: 자식 위젯을 부모 영역의 **중앙**에 배치합니다.
+  - `Align()`: 자식 위젯을 **원하는 위치**에 정밀하게 배치합니다.
+
+<!-- end list -->
+
+```dart
+Align(
+  alignment: Alignment.bottomRight, // 우측 하단 정렬
+  child: Container(width: 50, height: 50, color: Colors.blue),
+)
+```
+
+#### **`Flexible()`과 `Expanded()`: 비율 배치**
+
+`Row`나 `Column` 내부에서 공간을 비율로 나누어 차지하게 합니다.
+
+  - `Flexible()`: `flex` 값에 따라 공간을 **비율**로 차지합니다.
+  - `Expanded()`: `Flexible(fit: FlexFit.tight)`와 동일하며, 사용 가능한 **남은 공간 전체**를 차지합니다.
+
+<!-- end list -->
+
+```dart
+Row(
+  children: [
+    Flexible(flex: 2, child: Container(color: Colors.blue)), // 2의 비율
+    Flexible(flex: 1, child: Container(color: Colors.red)),  // 1의 비율
+  ],
+)
+```
+
+-----
+
+### \#\#\# 페이지 기본 구조: `Scaffold()`
+
+앱 화면의 기본 구조(상단 바, 본문, 하단 바 등)를 쉽게 만들도록 도와주는 뼈대 위젯입니다.
+
+  - `appBar`: 상단 앱 바 영역. `AppBar()` 위젯을 사용합니다.
+  - `body`: 화면의 대부분을 차지하는 중앙 본문 영역. (필수)
+  - `bottomNavigationBar`: 하단 내비게이션 바 영역.
+  - `floatingActionButton`: 화면 위에 떠 있는 원형 버튼.
+
+<!-- end list -->
+
+```dart
+Scaffold(
+  appBar: AppBar(
+    title: Text('My App'),
+    leading: Icon(Icons.menu), // 제목 왼쪽
+    actions: [Icon(Icons.settings)], // 제목 오른쪽
+  ),
+  body: Center(child: Text('본문 영역')),
+)
+```
+
+-----
+
+### \#\#\# 목록: `ListView()` 와 `ListView.builder()`
+
+스크롤이 가능한 목록을 만들 때 사용합니다.
+
+  - **`ListView()`**: 목록의 개수가 정해져 있을 때 간단하게 사용합니다.
+  - **`ListView.builder()`**: **동적으로 많은 목록**을 효율적으로 생성할 때 사용합니다. 화면에 보이는 부분만 렌더링하여 성능을 최적화합니다.
+
+<!-- end list -->
+
+```dart
+ListView.builder(
+  itemCount: 50, // 생성할 목록의 총 개수
+  itemBuilder: (context, i) { // 각 항목을 그리는 함수
+    return ListTile(
+      leading: Icon(Icons.person),
+      title: Text('Contact #$i'),
+    );
+  },
+)
+```
+
+-----
+
+### \#\#\# 버튼 위젯
+
+  - `TextButton()`: 글자만 있는 버튼
+  - `ElevatedButton()`: 입체감이 있는 버튼
+  - `IconButton()`: 아이콘만 있는 버튼
+
+<!-- end list -->
+
+```dart
+ElevatedButton(
+  onPressed: () {
+    // 버튼을 눌렀을 때 실행할 코드
+    print('버튼 클릭됨!');
+  },
+  child: Text('Click Me'),
+)
+```
+
+-----
+
+### \#\#\# 커스텀 위젯 (위젯 재사용)
+
+복잡하고 긴 레이아웃 코드를 별도의 클래스로 분리하여 재사용할 수 있습니다. `stless` 또는 `stful` 키워드로 자동 완성할 수 있습니다.
+
+```dart
+// 커스텀 위젯 정의 (StatelessWidget)
+class MyCustomWidget extends StatelessWidget {
+  const MyCustomWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
-
-     return 짧은단어로축약할위젯()
+    return Container(
+      width: 100,
+      height: 100,
+      color: Colors.red,
+    );
   }
 }
-~~~
-1.작명부분에 작명하고 (영어대문자로 시작) 
-2.return 오른쪽에 위젯넣는 부분에 축약할 위젯들을 넣으면 된다.
-3.작명() 이렇게 쓸 때 마다 축약했던 위젯들이 그 자리에 북붙된다.
 
-### ListView 위젯
--무한 스크롤된다. 
+// 커스텀 위젯 사용
+MyCustomWidget()
+```
 
--데이터만 있으면 자동으로 반복문 돌려줌 
+-----
 
--지나간 목록은 삭제해서 메모리 아낄 수 있음
+## II. 플러터 주요 기능 구현
 
-위와 같은 목록을 만들 때 항상 사용한다. ListView()는 Column() 이랑 유사하게 사용한다. children: [] 안에 목록으로 만들 위젯을 넣으면 된다. 
-#### ListTile() 위젯
-왼쪽에 그림있고 오른쪽에 글있는 레이아웃을 만들때 편리하다.
-~~~
-ListView(
- children: [
-   ListTile(
-     leading: Icon(Icons.star),
-     title: Text('text'),
-      )
-   ]
-);
-~~~
+### \#\#\# State와 StatefulWidget
 
-#### ListView.builder()
-목록을 동적으로 많이 만들 경우에 사용한다. 서버에서 정보를 가져와야하는 경우 리스트의 갯수를 모를 수 있다. 그럴 때에는 동적으로 리스트를 생성해야한다.
-~~~
-ListView.builder(
- itemCount: 20,
- itemBuilder: (context, i){
-   return Text('안녕');
- }
-);
-~~~
-ListView.builder() 위젯을 넣고 파라미터를 2개 입력하면 된다.
+**State**는 앱의 '상태'를 저장하는 데이터입니다. 이 값이 변경되면 화면도 함께 변경되어야 합니다.
 
-itemCount: 리스트 갯수
+  - **StatelessWidget**: 한번 그려진 후 내용이 바뀌지 않는 정적인 위젯입니다.
+  - **StatefulWidget**: 사용자의 행동 등으로 **State가 변경되면 화면을 다시 그리는(재렌더링)** 동적인 위젯입니다.
 
-itemBuilder: (){return 반복할 위젯}
+`StatefulWidget` 내에서 변수를 선언하면 State가 되며, 이 값을 변경할 때는 반드시 `setState()` 함수로 감싸주어야 화면이 갱신됩니다.
 
-위의 코드는 Text('안녕') 을 ListView() 안에 20개 만들어준다. 일종의 반복문이다.
-
-## 플러터 여러가지 기능 구현 
-
-### FloatingActionButton
-Scaffold에 floatingActionButtion: FloatingActionButton을 입력하고 그 안에 child 파라미터와 onPressed 파라미터를 입력하면 하단에 공중에 뜬 버튼을 만들 수 있다. FAB라고 줄여서 많이 부른다. 버튼을 눌렸을 때 코드를 실행하고 싶은 경우 onPressed(){이곳에 실행하고 싶은 코드를 여기다 쓴다.} 
-
-###  state
-변수랑 똑같지만 변경사항이 생기면 state를 쓰고 있는 위젯이 자동으로 재렌더링된다.
-
-그래서 좋아요 숫자를 일반 변수가 아니라 state로 만들어서 저장하면 변수에 변경사항이 생길 때 마다 재렌더링 된다. 
-#### statefullWidget 
-state 만들어 쓸려면 state 보관함 + 커스텀 widget 을 한 세트로 만들어야 한다. stful이라고 아무데나 쓰고 탭하면 자동완성된다.
-~~~
-class 테스트 extends StatefulWidget{
- const 테스트 ({Key? key}) : super(key: key);
- @override
-_테스트state createState() => _테스트state();
-}
-class _테스트State extends State {
-var a = 1; //이 변수는 state가 된다.
-@override
- Widget build(BuildContext context) {
- return Container();
- }
-}
-~~~
-커스텀 위젯을 만드는 문법과 비슷하다.
-
-1.위에 있는 class는 건드릴 필요 없다.
-
-2.둘째 class 안에 변수를 만들면 자동으로 state가 된다. a라는 state가 변경되면 자동으로 재렌더링된다.
-
-#### 기존 위젯을 StatefulWidget으로 바꾸는 방법
-사용중인 위젯의 StatelessWidget이라는 부분에 커서를 올리고 왼쪽에 전구버튼을 누르면 StatefulWidget으로 바꿀수 있다.
-이렇게 StatefulWidget으로 바꾼다고 해서 재렌더링이 되는 것이 아니다. setState((){변경할 내용}) 안에 써야한다. 
-
-데이터 변동사항이 잦을 것 같은 위젯은 전분 StatefulWidget으로 만들고 이 안에서 만든 변수는 모두 state 이다. 
-
-참고: class 대신 변수 함수 써도 된다.
-변수와 함수 문법은 긴 코드 짧은 단어로 바꿔주는 문법일 뿐이라.  긴 위젯들은 변수 함수에 담아써도 문제는 없지만 재렌더링이 거의
-필요없는 위젯들이다. ex)앱바, 하단바, 다이얼로그 안내문 등등... 재렌더링이 자주 되는 것들은  stateful 아니면 stateless 클래스로 
-만들어야 성능저하가 거의 없다.
-
-### Dialog
-앱쓸 때 뜨는 팝업/모달창 같은 거다. showDialog()라는 기본 함수가 있다. 이곳에 파라미터를 넣어주면 쉽게 다이얼로그가 생성된다.
-showDialog()는 쓰는 순간 Dialog가 하나 생긴다 버튼의 onPressed: 안에 넣어보면
-~~~
-FloatingActionButton(
-  child: Text('버튼'),
-  onPressed: () {
-
-showDialog(
-  context: context,
-  builder: (context){
-    return Dialog(
-      child: Text('AlertDialog Title'),
-      );
-     },
-     );
-    },
-),
-~~~
-showDialog()에 들어갈 첫 파라미터는 context이다. 둘째 파라미터는 builder: 인제 여기에는 위젯을 return으로 반환하는 함수를 넣으면 된다. Dialog() 위젯은 모달창같은 배경이 까만 하얀박스를 만들어주는 기본 위젯이다. 
-
-하지만 Dialog가 나타나지 않는 경우도 있다. 이 문제를 해결하기 전에 context부터 짚고 넘어가겠다.
-
-### context 개념
-부모 위젯이 누구인가 정보를 가지고 있는 변수이다. 커스텀 위젯을 만들 때 보면 build() 함수를 쓰도록 되어있다. 근데 build()함수안에 첫 파라미터를 넣으면 그건 무조건 현재 위젯의 부모들이 누군지 담고있다. 참고로 이름은 마음대로 지어도 괜찮다.
-이것이 어디에 쓰이나면 showDialog(), Navigator(), Theme.of(), Scaffold.of() 이런 함수들은 context를 소괄호 안에 집어넣어야 작동을 하는 함수이기 때문에 이곳에 쓰인다.  
-
-이 중에 showDialog() 함수는 MaterialApp이 들어가 있어야 제대로 작동하기 때문에 context가 부모로 MaterialApp()을 가지도록 코드를 작성해야한다. 
-
-### Dialog를 띄웠을 떄 입력창 하나와 버튼 두개를 만드는 숙제 
- 위 숙제를 해결하기 위해 인터넷 검색을 통해 TextField() 위젯에 대해 알았다. 사용자의 입력을 실시간으로 관리하기 위한 위젯으로 StatefulWidget으로 이루어져 있다.
- 사용하기 위해서는 TextEditingController라는 객체를 생성해야한다. 
- ~~~
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
-
-  @Override
-  State<MyWidget> createState() => _MyWidgetState();
+```dart
+class Counter extends StatefulWidget {
+  const Counter({super.key});
+  @override
+  State<Counter> createState() => _CounterState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
-  // 1. TextField를 제어할 비공개 컨트롤러 변수 선언
-  final TextEditingController _controller = TextEditingController();
+class _CounterState extends State<Counter> {
+  int count = 0; // State 변수
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(
-          controller: _controller, // 2. TextField에 컨트롤러 연결
-        ),
+        Text(count.toString()),
         ElevatedButton(
           onPressed: () {
-            // 3. 버튼을 누르면 컨트롤러를 통해 TextField의 값을 가져옴
-            print('입력된 텍스트: ${_controller.text}');
+            setState(() { // 이 함수 안에서 state를 변경해야 재렌더링됨
+              count++;
+            });
           },
-          child: const Text('값 확인'),
-        ),
+          child: Text('더하기'),
+        )
       ],
     );
   }
 }
-~~~
-이런 식으로 사용된다. 참고로 _는 Dart언어의 private 변수임을 선언하는 기호라고 한다. 즉 해당 변수가 해당 클래스에서만 사용된다는 뜻이다. 
+```
+
+> **성능 최적화 Tip**
+> `AppBar`, `BottomNavigationBar`처럼 자주 변경되지 않는 부분은 `StatelessWidget`으로, 좋아요 버튼처럼 데이터가 자주 변하는 부분은 `StatefulWidget`으로 만들어야 앱 성능 저하를 막을 수 있습니다.
+
+-----
+
+### \#\#\# 다이얼로그 (팝업): `showDialog()`
+
+사용자에게 알림이나 추가 입력을 받을 때 사용하는 팝업창입니다.
+
+```dart
+showDialog(
+  context: context, // 현재 위젯의 context 정보
+  builder: (context) {
+    return Dialog(
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Text('다이얼로그 내용'),
+      ),
+    );
+  },
+);
+```
+
+> **`context`란?**
+> 위젯 트리에서 **현재 위젯의 위치 정보**를 담고 있는 중요한 변수입니다. `showDialog`, `Navigator` 등 다른 위젯이나 페이지와 상호작용할 때 "누가 누구를 호출했는지" 알려주는 역할을 합니다.
+
+-----
+
+### \#\#\# State 전달 (부모 ↔ 자식)
+
+#### **1. 부모 → 자식으로 State 전달**
+
+자식 위젯을 호출할 때 생성자의 파라미터로 데이터를 전달합니다.
+
+```dart
+// 1. 부모 위젯에서 자식 위젯 호출 시 데이터 전달
+MyWidget(name: '홍길동', count: 10)
+
+// 2. 자식 위젯에서 데이터 받기
+class MyWidget extends StatelessWidget {
+  final String name; // 전달받을 데이터의 이름과 타입을 선언
+  final int count;
+
+  // 생성자를 통해 데이터를 받음
+  const MyWidget({super.key, required this.name, required this.count});
+
+  @override
+  Widget build(BuildContext context) {
+    // 3. 전달받은 데이터 사용
+    return Text('$name님의 카운트: $count');
+  }
+}
+```
+
+#### **2. 자식 → 부모로 State 변경 요청**
+
+자식은 부모의 State를 직접 수정할 수 없습니다. 대신 **부모가 만든 State 변경 함수를 자식에게 전달**하고, 자식은 그 함수를 호출만 합니다.
+
+```dart
+// 1. 부모 위젯: State 변경 함수를 정의하고 자식에게 전달
+class Parent extends StatefulWidget {
+  // ...
+  void increment() {
+    setState(() { count++; });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Child(
+      count: count,
+      increment: increment, // 함수 자체를 전달
+    );
+  }
+}
+
+// 2. 자식 위젯: 함수를 받아 버튼 클릭 시 실행
+class Child extends StatelessWidget {
+  final int count;
+  final Function() increment; // 함수를 받을 변수 선언
+
+  const Child({super.key, required this.count, required this.increment});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        increment(); // 전달받은 함수 실행
+      },
+      child: Text(count.toString()),
+    );
+  }
+}
+```
+### 혼자서 해볼 응용사항은
+
+- 완료버튼 눌러도 Dialog 닫히게 만들려면? [V]
+
+- 빈칸으로 완료버튼 누르면 추가안되게?   [V]
+
+- 이름옆에 삭제버튼과 기능?     [V]
+
+- 이름들 가나다순 정렬버튼? (sort함수 사용법을 찾아봅시다) [V]
+
+- 전화번호 데이터도 3개 마련해놓고 전화번호도 보여주고 싶으면?
