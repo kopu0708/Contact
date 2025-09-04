@@ -464,4 +464,5 @@ android.enableJetifier=true
 >
 > 카메라, 위치, 마이크 등 다른 권한에 대한 설정은 [permission\_handler 공식 예제 `AndroidManifest.xml` 파일](https://www.google.com/search?q=%5Bhttps://github.com/Baseflow/flutter-permission-handler/blob/main/permission_handler/example/android/app/src/main/AndroidManifest.xml)에서](https://www.google.com/search?q=https://github.com/Baseflow/flutter-permission-handler/blob/main/permission\_handler/example/android/app/src/main/AndroidManifest.xml)%EC%97%90%EC%84%9C) 확인할 수 있습니다.
 
+###
 
