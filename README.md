@@ -392,7 +392,7 @@ class Child extends StatelessWidget {
 
 - 전화번호 데이터도 3개 마련해놓고 전화번호도 보여주고 싶으면?[V]
   
-```
+____
 
 ## 유저에게 앱 권한 요청하기 
 
