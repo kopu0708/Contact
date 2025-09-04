@@ -393,9 +393,75 @@ class Child extends StatelessWidget {
 - 전화번호 데이터도 3개 마련해놓고 전화번호도 보여주고 싶으면?[V]
   
 ____
+## 유저에게 권한 요청하는 법
 
-## 유저에게 앱 권한 요청하기 
+### 1\. `permission_handler` 패키지 설치
 
+앱에서 사용자의 연락처나 파일 같은 민감한 데이터에 접근하려면, 먼저 사용자에게 권한을 요청해야 합니다. 이를 위해 `permission_handler` 패키지를 설치합니다.
 
+1.  프로젝트의 `pubspec.yaml` 파일을 엽니다.
+
+2.  `dependencies:` 항목 아래에 `permission_handler`를 추가합니다. (버전은 최신 버전을 확인하고 명시하는 것이 좋습니다.)
+
+    ```yaml
+    dependencies:
+      flutter:
+        sdk: flutter
+      permission_handler: ^11.3.1 # 예시 버전
+    ```
+
+3.  파일을 저장한 후, IDE(통합 개발 환경)의 `Pub get` 버튼을 클릭하거나 터미널에서 아래 명령어를 실행하여 패키지를 설치합니다.
+
+    ```bash
+    flutter pub get
+    ```
+
+### 2\. 패키지 import 하기
+
+권한 요청 기능을 사용할 파일 상단에 `import` 구문을 추가하여 패키지를 가져옵니다. 일반적으로 `main.dart`나 권한 요청 로직이 들어가는 파일에 추가합니다.
+
+```dart
+import 'package:permission_handler/permission_handler.dart';
+```
+
+-----
+
+### 3\. 안드로이드(Android) 설정
+
+안드로이드 앱에서 권한을 사용하려면 몇 가지 추가 설정이 필요합니다.
+
+#### 1\) `gradle.properties` 파일 확인
+
+`android/gradle.properties` 파일에 아래 두 줄이 포함되어 있는지 확인하고, 없다면 추가합니다. 대부분의 최신 플러터 프로젝트에는 이미 설정되어 있습니다.
+
+```properties
+android.useAndroidX=true
+android.enableJetifier=true
+```
+
+#### 2\) `AndroidManifest.xml` 파일에 권한 추가
+
+`android/app/src/main/AndroidManifest.xml` 파일의 `<manifest>` 태그 안에, 요청하려는 권한을 `<uses-permission>` 태그로 명시해야 합니다.
+
+예를 들어, **연락처**와 **저장 공간** 접근 권한을 요청하려면 아래 코드를 추가합니다.
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    
+    <application
+        ...
+    </application>
+</manifest>
+```
+
+> 💡 **더 많은 권한 정보**
+>
+> 카메라, 위치, 마이크 등 다른 권한에 대한 설정은 [permission\_handler 공식 예제 `AndroidManifest.xml` 파일](https://www.google.com/search?q=%5Bhttps://github.com/Baseflow/flutter-permission-handler/blob/main/permission_handler/example/android/app/src/main/AndroidManifest.xml)에서](https://www.google.com/search?q=https://github.com/Baseflow/flutter-permission-handler/blob/main/permission\_handler/example/android/app/src/main/AndroidManifest.xml)%EC%97%90%EC%84%9C) 확인할 수 있습니다.
 
 
